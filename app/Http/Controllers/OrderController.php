@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCreated;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -15,6 +17,7 @@ class OrderController extends Controller
             'email' => 'email|required'
         ]);
         Order::create($request->all());
+        Mail::to("ZolotukhinVM@ya.ru")->send(new OrderCreated($request));
         return redirect()->route('order.list');
     }
 
