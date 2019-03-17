@@ -57,6 +57,8 @@ class ProductController extends Controller
 
     public function detail(Product $product)
     {
+        $product = Product::find($product->id);
+        $product->increment('view');
         return view('user.product.detail', ['product' => $product]);
     }
 }

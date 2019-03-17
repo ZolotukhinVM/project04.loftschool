@@ -4,7 +4,9 @@
 @section('header', $product->name)
 
 @section('content')
-
+    <div class="alert alert-info">
+        <b>Количество просмотров: {{ $product->view }}</b>
+    </div>
     <p>{{ $product->description }}</p>
     <h1>{{ $product->price }} &#x20bd;</h1>
     @guest
