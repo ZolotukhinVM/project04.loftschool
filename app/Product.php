@@ -14,9 +14,8 @@ class Product extends Model
         $product->price = $request->get('price');
         $product->description = htmlentities($request->get('description'));
         $product->save();
-        $newFile = time() . '.' . $request->productfile->extension();
-        $request->productfile->move('./upload/products/', $newFile);
-        $product->photo = $newFile;
+        $request->productfile->store('uploads', 'public');
+        $product->photo = $request->productfile->hashName();
         $product->save();
     }
 

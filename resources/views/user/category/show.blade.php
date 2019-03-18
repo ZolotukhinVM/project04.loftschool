@@ -15,7 +15,7 @@
                     <div class="products-category__list__item__thumbnail">
                         <a href="{{ route('product.detail', ['id' => $product->id]) }}"
                            class="products-category__list__item__thumbnail__link">
-                            <img src="/upload/products/example.jpg" alt="Preview-image">
+                            <img src="{{ asset("storage/uploads/" . $product->photo) }}" alt="Preview-image">
                         </a>
                     </div>
                     <div class="products-category__list__item__description"><span class="products-price">{{ $product->price }} &#x20bd;</span>

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -9,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class OrderCreated extends Mailable
 {
-    public $data;
+    public $order;
     use Queueable, SerializesModels;
 
     /**
@@ -17,9 +18,9 @@ class OrderCreated extends Mailable
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(Order $order)
     {
-        $this->data = $data;
+        $this->order = $order;
     }
 
     /**
@@ -29,6 +30,6 @@ class OrderCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.order.created', ['data' => $this->data]);
+        return $this->view('mail.order.created', ['data' => $this->order])->subject('New order');
     }
 }

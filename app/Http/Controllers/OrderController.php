@@ -16,8 +16,8 @@ class OrderController extends Controller
             'name' => 'max:50|required',
             'email' => 'email|required'
         ]);
-        Order::create($request->all());
-        Mail::to("ZolotukhinVM@ya.ru")->send(new OrderCreated($request));
+        $order = Order::create($request->all());
+        Mail::to("ZolotukhinVM@ya.ru")->send(new OrderCreated(Order::find($order->id)));
         return redirect()->route('order.list');
     }
 

@@ -27,7 +27,7 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->created_at }}</td>
-                        <td><a href="../../upload/products/{{ $product->photo }}" target="_blank">Photo</a></td>
+                        <td><a href="{{ asset("storage/uploads/" . $product->photo) }}" target="_blank">Photo</a></td>
                         <td>
                             <a href="{{ route('product.edit', ['id'=>$product->id]) }}"
                                class="btn btn-outline-secondary">

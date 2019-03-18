@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Requests\ProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,9 +41,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
         if ($request->productfile) {
-            $newFile = time() . '.' . $request->productfile->extension();
-            $request->productfile->move('./upload/products/', $newFile);
-            $product->photo = $newFile;
+            $request->productfile->store('uploads', 'public');
+            $product->photo = $request->productfile->hashName();
             $product->save();
         }
         return redirect()->route('product');
@@ -50,7 +50,7 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        @unlink('./upload/products/' . Product::find($id)->photo);
+        Storage::disk('public')->delete('uploads/' . Product::find($id)->photo);
         Product::destroy($id);
         return redirect()->route('product');
     }
