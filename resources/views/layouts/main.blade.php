@@ -100,7 +100,7 @@
                     <div class="content-head__search-block">
                         <div class="search-container">
                             <form class="search-container__form" method="get" action="{{ route('search.result') }}">
-                                <input type="text" name="s" class="search-container__form__input" value="{{ old('s')  }}">
+                                <input type="text" name="s" class="search-container__form__input" value="{{ app('request')->input('s')  }}" required>
                                 <input type="submit" class="search-container__form__btn" value="Search">
                             </form>
                         </div>

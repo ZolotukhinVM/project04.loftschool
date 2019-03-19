@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'User')
-@section('header', 'Search result / ' .count($products))
+@section('header', 'Search result / ' .$products->total()))
 
 @section('content')
 
