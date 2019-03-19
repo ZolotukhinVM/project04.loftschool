@@ -99,9 +99,9 @@
                     </div>
                     <div class="content-head__search-block">
                         <div class="search-container">
-                            <form class="search-container__form">
-                                <input type="text" class="search-container__form__input">
-                                <button class="search-container__form__btn">search</button>
+                            <form class="search-container__form" method="get" action="{{ route('search.result') }}">
+                                <input type="text" name="s" class="search-container__form__input" value="{{ old('s')  }}">
+                                <input type="submit" class="search-container__form__btn" value="Search">
                             </form>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
     <footer class="footer">
         <div class="footer__footer-content">
             <div class="footer__footer-content__main-content">
-                &copy; ZolotukhinVM @php echo date('Y') @endphp / Make with &#10084;
+                &copy; ZolotukhinVM @php echo date('Y') @endphp / Made with &#10084;
             </div>
         </div>
     </footer>

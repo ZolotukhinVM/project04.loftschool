@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <td>Mail</td>
-                    <td><input type="text" name="email" value="{{ Auth::user()->email }}" required></td>
+                    <td><input type="email" name="email" value="{{ Auth::user()->email }}" required></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -57,27 +57,8 @@
                    class="btn btn-outline-danger">
                     Delete
                 </a>
+            @endif
         </div>
-    @endif
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Product</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Удаление невозможно! Товар находится в таблице заказов.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     @endif
 
 @endsection

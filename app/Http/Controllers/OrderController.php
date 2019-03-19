@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\OrderCreated;
 use App\Order;
-use Illuminate\Http\Request;
+use App\Http\Requests\OrderRequest;
+use App\Mail\OrderCreated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'max:50|required',
-            'email' => 'email|required'
-        ]);
         $order = Order::create($request->all());
         Mail::to("ZolotukhinVM@ya.ru")->send(new OrderCreated(Order::find($order->id)));
         return redirect()->route('order.list');
@@ -24,10 +20,10 @@ class OrderController extends Controller
     public function list()
     {
         if (Auth::user()->level == 0) {
-            $order = Order::where('email', Auth::user()->email)->orderBy('id', 'desc')->paginate(10);
+            $orders = Order::where('email', Auth::user()->email)->orderBy('id', 'desc')->paginate(10);
         } else {
-            $order = Order::orderBy('id', 'desc')->paginate(10);
+            $orders = Order::orderBy('id', 'desc')->paginate(10);
         }
-        return view('user.order.list', ['orders' => $order]);
+        return view('user.order.list', compact('orders'));
     }
 }

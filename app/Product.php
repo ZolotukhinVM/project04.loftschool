@@ -10,13 +10,27 @@ class Product extends Model
     {
         $product = new Product();
         $product->category_id = $request->category;
-        $product->name = htmlentities($request->get('name'));
-        $product->price = $request->get('price');
-        $product->description = htmlentities($request->get('description'));
-        $product->save();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
         $request->productfile->store('uploads', 'public');
         $product->photo = $request->productfile->hashName();
         $product->save();
+    }
+
+    public static function updateProduct($id, $request)
+    {
+        $product = Product::find($id);
+        $product->category_id = $request->category;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
+        if ($request->productfile) {
+            $request->productfile->store('uploads', 'public');
+            $product->photo = $request->productfile->hashName();
+            $product->save();
+        }
     }
 
     public function order()

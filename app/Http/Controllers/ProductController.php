@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'desc')->paginate(10);
-        return view('admin.product.index', ["products" => $products]);
+        return view('admin.product.index', compact('products'));
     }
 
     public function create()
@@ -29,22 +29,13 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return view('admin.product.edit', ['product' => $product, 'category' => Category::orderBy('id')->get(['id', 'name'])]);
+        $category = Category::orderBy('id')->get(['id', 'name']);
+        return view('admin.product.edit', compact('product', 'category'));
     }
 
     public function update($id, ProductRequest $request)
     {
-        $product = Product::find($id);
-        $product->name = $request->name;
-        $product->category_id = $request->category;
-        $product->price = $request->price;
-        $product->description = $request->description;
-        $product->save();
-        if ($request->productfile) {
-            $request->productfile->store('uploads', 'public');
-            $product->photo = $request->productfile->hashName();
-            $product->save();
-        }
+        Product::updateProduct($id, $request);
         return redirect()->route('product');
     }
 
@@ -57,7 +48,13 @@ class ProductController extends Controller
 
     public function detail(Product $product)
     {
-        Product::find($product->id)->increment('view');
-        return view('user.product.detail', ['product' => $product]);
+        $product->increment('view');
+        return view('user.product.detail', compact('product'));
+    }
+
+    public function search(Request $request)
+    {
+        $products = Product::where('name', 'LIKE', '%' . $request->s . '%')->paginate(6);
+        return view('user.search.result', compact('products'));
     }
 }

@@ -60,3 +60,5 @@ Route::group(['prefix' => '/category'], function (){
 Route::group(['prefix' => '/product'], function (){
     Route::get('{product}', 'ProductController@detail')->name('product.detail');
 });
+
+Route::get('/search', 'ProductController@search')->name('search.result');

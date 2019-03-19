@@ -9,8 +9,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $data = Category::orderBy('id', 'desc')->paginate(10);
-        return view('admin.category.index', ['category' => $data]);
+        $category = Category::orderBy('id', 'desc')->paginate(10);
+        return view('admin.category.index', compact('category'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admin.category.edit', ['category' => $category]);
+        return view('admin.category.edit', compact('category'));
     }
 
     public function update($id, CategoryRequest $request)
