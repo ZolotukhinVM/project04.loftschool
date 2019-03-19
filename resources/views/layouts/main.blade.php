@@ -79,7 +79,7 @@
             <div class="sidebar-item">
                 <div class="sidebar-item__title">Категории</div>
                 <div class="sidebar-item__content">
-                    @foreach(\App\Category::all('id', 'name') as $category)
+                    @foreach($categories as $category)
                         <li class="sidebar-category__item">
                             <a href="/category/{{ $category->id }}"
                                class="sidebar-category__item__link">{{ $category->name }}
