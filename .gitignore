@@ -11,3 +11,5 @@ npm-debug.log
 yarn-error.log
 .idea
 readme.md
+config/debugbar.php
+storage/debugbar/

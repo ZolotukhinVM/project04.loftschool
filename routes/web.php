@@ -41,7 +41,7 @@ Route::group(['prefix' => '/admin/category', 'middleware' => ['auth', 'level']],
 });
 
 Route::group(['prefix' => '/admin/order', 'middleware' => ['auth', 'level']], function (){
-    Route::get('list', 'OrderController@list')->name('admin.order.list');
+    Route::get('list', 'OrderController@adminList')->name('admin.order.list');
 });
 
 // auth user

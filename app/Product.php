@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $perPage = 9;
+
     public static function storeProduct($request)
     {
         $product = new Product();
@@ -31,6 +33,11 @@ class Product extends Model
             $product->photo = $request->productfile->hashName();
             $product->save();
         }
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo ?? 'example.jpg';
     }
 
     public function order()

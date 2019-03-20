@@ -18,7 +18,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create', ['category' => Category::orderBy('id')->get(['id', 'name'])]);
+        $category = Category::orderBy('id')->get(['id', 'name']);
+        return view('admin.product.create', compact('category'));
     }
 
     public function store(ProductRequest $request)
@@ -54,7 +55,7 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $products = Product::where('name', 'LIKE', '%' . $request->s . '%')->paginate(6);
+        $products = Product::where('name', 'LIKE', '%' . $request->s . '%')->paginate();
         return view('user.search.result', compact('products'));
     }
 }

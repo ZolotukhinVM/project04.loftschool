@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $perPagePage = 10;
     protected $fillable = ['product_id', 'name', 'email'];
 
     public function product()

@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::orderBy('id', 'desc')->paginate(10);
+        $category = Category::orderBy('id', 'desc')->paginate();
         return view('admin.category.index', compact('category'));
     }
 
@@ -43,9 +43,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return view('user.category.show', [
-            'products' => $category->products()->paginate(6),
-            'category' => $category
-        ]);
+        $products = $category->products()->paginate();
+        return view('user.category.show', compact('category', 'products'));
     }
 }
