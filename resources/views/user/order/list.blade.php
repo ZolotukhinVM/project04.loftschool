@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'User')
-@section('header', "Orders / " . count($orders))
+@section('header', "Orders / " . $orders->total())
 
 @section('content')
 
@@ -19,7 +19,7 @@
                 <td>{{$order->name}}</td>
                 <td>{{$order->email}}</td>
                 <td>
-                    <a href="{{route('product.detail', ['id'=>$order->product->id])}}">
+                    <a href="{{ route('product.detail', ['id'=>$order->product->id]) }}">
                         {{$order->product->name}}
                     </a>
                 </td>

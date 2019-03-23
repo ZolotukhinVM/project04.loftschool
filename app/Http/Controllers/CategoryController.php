@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Product;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        Category::create($request->all());
+        Category::create($request->only(['name', 'description']));
         return redirect()->route('category');
     }
 
@@ -31,7 +32,7 @@ class CategoryController extends Controller
 
     public function update($id, CategoryRequest $request)
     {
-        Category::find($id)->update($request->all());
+        Category::findOrFail($id)->update($request->only(['name', 'description']));
         return redirect()->route('category');
     }
 
@@ -43,7 +44,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $products = $category->products()->paginate();
+        //$products = $category->products()->paginate();
+        $products = Product::where('category_id', $category->id)->paginate();
         return view('user.category.show', compact('category', 'products'));
     }
 }

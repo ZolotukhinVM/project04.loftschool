@@ -20,16 +20,16 @@
                         @csrf
                         <tr>
                             <td>Name</td>
-                            <td><input type="text" name="name" value="{{$product->name}}" required></td>
+                            <td><input type="text" name="name" value="{{ $product->name }}" required></td>
                         </tr>
                         <tr>
                             <td>Category</td>
                             <td>
-                                <select name="category" required>
+                                <select name="category_id" required>
                                     <option value="">Укажите категорию:</option>
                                     @foreach($category as $item)
                                         <option value="{{ $item->id }}"
-                                                @if($product->category_id=== $item->id) selected @endif>
+                                                @if($product->category_id === $item->id) selected @endif>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach

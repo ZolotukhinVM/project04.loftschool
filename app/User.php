@@ -10,6 +10,8 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ADMIN_LEVEL = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,4 +38,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function accessLevel()
+    {
+        return $this->level == self::ADMIN_LEVEL ? true : false;
+    }
+
 }

@@ -24,7 +24,10 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        Product::storeProduct($request);
+        $product = Product::create($request->only(['category_id', 'name', 'price', 'description']));
+        $request->productfile->store('uploads', 'public');
+        $product->photo = $request->productfile->hashName();
+        $product->save();
         return redirect()->route('product');
     }
 
@@ -36,7 +39,15 @@ class ProductController extends Controller
 
     public function update($id, ProductRequest $request)
     {
-        Product::updateProduct($id, $request);
+        $product = Product::findOrFail($id);
+        $product->update($request->only([
+            'category_id', 'name', 'price', 'description'
+        ]));
+        if ($request->productfile) {
+            $request->productfile->store('uploads', 'public');
+            $product->photo = $request->productfile->hashName();
+            $product->save();
+        }
         return redirect()->route('product');
     }
 

@@ -25,7 +25,7 @@
                         <tr>
                             <td>Category</td>
                             <td>
-                                <select name="category" required>
+                                <select name="category_id" required>
                                     <option value="">Укажите категорию:</option>
                                     @foreach($category as $item)
                                         <option value="{{ $item->id }}" {{ (old("category") == $item->id ? "selected":"") }}>

@@ -13,3 +13,4 @@ yarn-error.log
 readme.md
 config/debugbar.php
 storage/debugbar/
+_ide_helper.php

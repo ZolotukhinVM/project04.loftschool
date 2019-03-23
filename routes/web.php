@@ -62,3 +62,4 @@ Route::group(['prefix' => '/product'], function (){
 });
 
 Route::get('/search', 'ProductController@search')->name('search.result');
+Route::get('/ajax/order', 'AjaxController@order')->name('ajax.order');
